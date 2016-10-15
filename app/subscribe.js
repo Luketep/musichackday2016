@@ -39,18 +39,23 @@ handleTypeChange = function (event) {
     submitUserInfo();
 };
 
+initialized = false;
 
 channel.bind('pusher:subscription_succeeded', function() {
-    navigator.geolocation.getCurrentPosition(
-        processGeolocation,
-        // Optional settings below
-        geolocationError,
-        {
-            timeout: 10000,
-            enableHighAccuracy: true,
-            maximumAge: Infinity
-        }
-    );
+    if (!initialized) {
+        navigator.geolocation.getCurrentPosition(
+            processGeolocation,
+            // Optional settings below
+            geolocationError,
+            {
+                timeout: 10000,
+                enableHighAccuracy: true,
+                maximumAge: Infinity
+            }
+        );
+        initialized = true;
+    }
+
 });
 
 
