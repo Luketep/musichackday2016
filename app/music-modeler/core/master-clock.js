@@ -20,6 +20,9 @@ function MasterClock(eventBus, audioContext) {
   this._currentNote = 0.0;
   this._scheduleAheadTime = 0.3; // seconds
 
+  eventBus.on('gain.change', function (data){
+    this._tempo = data.gain * 100 + 40;
+  },this);
 
   eventBus.on('import.done', function() {
     this.init();

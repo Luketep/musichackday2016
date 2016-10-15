@@ -72,6 +72,7 @@
     "music-notation": "^1.0.1",
     "music-scale": "^1.2.0",
     "note-parser": "^2.0.0",
-    "nuimojs": "^0.1.0"
+    "nuimojs": "^0.1.0",
+    "pusher" : "~1.5.0"
   }
 }

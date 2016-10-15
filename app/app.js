@@ -52,6 +52,7 @@ var pusher = new Pusher('fe7f64b7bbd141ad1df0', {
 });
 
 var channel = pusher.subscribe('private-mtg-channel');
+var settingsChannel = pusher.subscribe('private-settings-channel');
 
 channel.bind('pusher:subscription_succeeded', function() {
     channel.bind('client-location',
@@ -59,6 +60,10 @@ channel.bind('pusher:subscription_succeeded', function() {
             bpmnjs._emit('api.client.event',data);
         }
     );
+
+    settingsChannel.bind('gain', function (data) {
+        bpmnjs._emit('gain.change',data);
+    });
 });
 
 
