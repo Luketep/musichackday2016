@@ -46,9 +46,6 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
   var handleEnd = function(context) {
     var shape = context.shape;
 
-    if (!shape) {
-      shape = this._lastShape;
-    }
     if (is(shape, 'bpmn:StartEvent')) {
       var generator = this.createNewGenerator(shape);
 
@@ -124,7 +121,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       this._canvas.addShape(shape);
 
       this._lastShape = shape;
-      handleEnd.bind(this)(shape);
+      context.shape = shape;
+      handleEnd.bind(this)(context);
     } else if (context.symbol === 'DRUM') {
       context.id = context.client;
       var options = {
@@ -142,11 +140,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       attachBo (shape,options);
       this._canvas.addShape(shape);
       this._lastShape = shape;
-      handleEnd.bind(this)(shape);
+      context.shape = shape;
+      handleEnd.bind(this)(context);
     } else if (context.symbol === 'CLAP') {
       context.id = context.client;
       var options = {
-        type: 'bpmn:ServiceTask',
+        type: 'bpmn:ManualTask',
         hidden: false,
         x: Math.round(0),
         y: Math.round(0),
@@ -160,7 +159,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       attachBo (shape,options);
       this._canvas.addShape(shape);
       this._lastShape = shape;
-      handleEnd.bind(this)(shape);
+      context.shape = shape;
+      handleEnd.bind(this)(context);
     }
   }, this);
 
