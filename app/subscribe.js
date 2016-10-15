@@ -65,5 +65,5 @@ channel.bind('pusher:subscription_succeeded', function() {
 var watchID = navigator.geolocation.watchPosition(processGeolocationChange,geolocationError, {
     timeout: 10000,
     enableHighAccuracy: true,
-    maximumAge: Infinity
+    maximumAge: 10000
 });
