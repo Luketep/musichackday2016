@@ -111,8 +111,6 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         hidden: false,
         x: Math.round(0),
         y: Math.round(0),
-        width: Math.round(100),
-        height: Math.round(100),
         eventDefinitionType: "bpmn:MessageEventDefinition",
         subDivision: 4
       };
@@ -130,8 +128,6 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         hidden: false,
         x: Math.round(0),
         y: Math.round(0),
-        width: Math.round(100),
-        height: Math.round(100),
         preset: 'samplerKick',
         note: 'c3'
 
@@ -149,8 +145,6 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         hidden: false,
         x: Math.round(0),
         y: Math.round(0),
-        width: Math.round(100),
-        height: Math.round(100),
         preset: 'samplerClap',
         note: 'c3'
 
