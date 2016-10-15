@@ -3,7 +3,7 @@ var Pusher = require('pusher');
 Pusher.logToConsole = true;
 
 var pusher = new Pusher({
-    app_id: "259586",
+    appId: "259586",
     key: "fe7f64b7bbd141ad1df0",
     secret: "379094cf97257b76228f"
 });
