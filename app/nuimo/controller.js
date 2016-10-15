@@ -70,7 +70,7 @@ nuimo.on("discover", (device) => {
         device.gain += scale * amount;
         //device.gain = _.clamp(device.gain, 0, 1); //not working :/
         device.gain = clamp(device.gain);
-        device.setLEDMatrix(matrixVolume.getMatrix(device.gain), 255, 2000);
+        device.setLEDMatrix(matrixVolume.getMatrix(device.gain), 255, 0);
         console.log("gain:", device.gain);
 
 
