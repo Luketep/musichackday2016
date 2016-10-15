@@ -114,7 +114,7 @@ module.exports = function(grunt) {
       samples: {
         files: [ '<%= config.sources %>/**/*.*' ],
         tasks: [ 'copy:app' ]
-      },
+      }
     },
     connect: {
       options: {
@@ -127,7 +127,7 @@ module.exports = function(grunt) {
         options: {
           open: true,
           base: [
-            '<%= config.dist %>'
+
           ]
         }
       }
@@ -145,8 +145,21 @@ module.exports = function(grunt) {
       unit: {
         browsers: TEST_BROWSERS
       }
+    },
+    express: {
+      options: {
+        // Override defaults here
+      },
+      dev: {
+        options: {
+          port : 3000,
+          script: 'server/main.js'
+        }
+      }
     }
   });
+
+  grunt.loadNpmTasks('grunt-express-server');
 
   // tasks
 
@@ -164,4 +177,6 @@ module.exports = function(grunt) {
   grunt.registerTask('auto-test', [ 'karma:unit' ]);
 
   grunt.registerTask('default', [ 'jshint', 'build' ]);
+
+  grunt.registerTask('server', [ 'express:dev' ]);
 };
