@@ -62,7 +62,7 @@ channel.bind('pusher:subscription_succeeded', function() {
     );
 
     channel.bind('gain', function (data) {
-
+        bpmnjs._emit('gain.change',data);
     });
 });
 
