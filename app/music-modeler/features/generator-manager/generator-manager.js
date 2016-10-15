@@ -142,6 +142,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
           x: Math.round(context.clientCoordinates.x),
           y: Math.round(context.clientCoordinates.y),
           eventDefinitionType: "bpmn:MessageEventDefinition",
+          client: context.client,
           subDivision: 4
         };
         var shape = this._elementFactory.createShape(options);
@@ -159,6 +160,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
           x: Math.round(context.clientCoordinates.x),
           y: Math.round(context.clientCoordinates.y),
           preset: 'samplerKick',
+          client: context.client,
           note: 'c3'
 
         };
@@ -176,6 +178,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
           x: Math.round(context.clientCoordinates.x),
           y: Math.round(context.clientCoordinates.y),
           preset: 'samplerClap',
+          client: context.client,
           note: 'c3'
 
         };
