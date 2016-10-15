@@ -20,7 +20,7 @@ var processGeolocation = function(location) {
 var processGeolocationChange = function(location) {
     coordinates = {lat: location.coords.latitude, long: location.coords.longitude};
     document.getElementsByClassName("location")[0].innerHTML = JSON.stringify(coordinates,null,2);
-    //if (symbol) submitUserInfo();
+    if (symbol) submitUserInfo();
 };
 
 var geolocationError = function(msg) {
