@@ -83,6 +83,27 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     }
   };
 
+  var handleMovement = function(context) {
+    var shape = context.shape,
+        generator,
+        generatorShape;
+
+    if (isMusicalEvent(shape)) {
+
+      this.inGeneratorRange(shape, function(generator, generatorShape, stepNumber) {
+        this.connect(generator, generatorShape, shape, stepNumber);
+      });
+    } else {
+      // generator moved
+      generatorShape = shape;
+      generator = executor.getGenerator(generatorShape.id);
+
+      this.inElementRange(generator, generatorShape, function(shape, stepNumber) {
+        this.connect(generator, generatorShape, shape, stepNumber);
+      });
+    }
+  };
+
   var attachBo = function (shape, options) {
     var bo = shape.businessObject;
 
@@ -104,58 +125,69 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
   };
 
   eventBus.on('api.client.event', function(context) {
-    if (context.symbol === 'SIGNAL') {
-      context.id = context.client;
-      var options = {
-        type: 'bpmn:StartEvent',
-        hidden: false,
-        x: Math.round(context.clientCoordinates.x),
-        y: Math.round(context.clientCoordinates.y),
-        eventDefinitionType: "bpmn:MessageEventDefinition",
-        subDivision: 4
-      };
-      var shape = this._elementFactory.createShape(options);
-      attachBo (shape,options);
-      this._canvas.addShape(shape);
+    var existing = this._elementRegistry.filter(function(element) {
+      return element.client === context.clinet;
+    });
 
-      this._lastShape = shape;
-      context.shape = shape;
-      handleEnd.bind(this)(context);
-    } else if (context.symbol === 'DRUM') {
-      context.id = context.client;
-      var options = {
-        type: 'bpmn:ServiceTask',
-        hidden: false,
-        x: Math.round(context.clientCoordinates.x),
-        y: Math.round(context.clientCoordinates.y),
-        preset: 'samplerKick',
-        note: 'c3'
+    if (existing.length && existing.length > 0) {
+      context.shape = existing[0];
+      handleMovement(context);
+    } else {
+      // new shape creation
+      if (context.symbol === 'SIGNAL') {
+        context.id = context.client;
+        var options = {
+          type: 'bpmn:StartEvent',
+          hidden: false,
+          x: Math.round(context.clientCoordinates.x),
+          y: Math.round(context.clientCoordinates.y),
+          eventDefinitionType: "bpmn:MessageEventDefinition",
+          subDivision: 4
+        };
+        var shape = this._elementFactory.createShape(options);
+        attachBo (shape,options);
+        this._canvas.addShape(shape);
 
-      };
-      var shape = this._elementFactory.createShape(options);
-      attachBo (shape,options);
-      this._canvas.addShape(shape);
-      this._lastShape = shape;
-      context.shape = shape;
-      handleEnd.bind(this)(context);
-    } else if (context.symbol === 'CLAP') {
-      context.id = context.client;
-      var options = {
-        type: 'bpmn:ManualTask',
-        hidden: false,
-        x: Math.round(context.clientCoordinates.x),
-        y: Math.round(context.clientCoordinates.y),
-        preset: 'samplerClap',
-        note: 'c3'
+        this._lastShape = shape;
+        context.shape = shape;
+        handleEnd.bind(this)(context);
+      } else if (context.symbol === 'DRUM') {
+        context.id = context.client;
+        var options = {
+          type: 'bpmn:ServiceTask',
+          hidden: false,
+          x: Math.round(context.clientCoordinates.x),
+          y: Math.round(context.clientCoordinates.y),
+          preset: 'samplerKick',
+          note: 'c3'
 
-      };
-      var shape = this._elementFactory.createShape(options);
-      attachBo (shape,options);
-      this._canvas.addShape(shape);
-      this._lastShape = shape;
-      context.shape = shape;
-      handleEnd.bind(this)(context);
+        };
+        var shape = this._elementFactory.createShape(options);
+        attachBo (shape,options);
+        this._canvas.addShape(shape);
+        this._lastShape = shape;
+        context.shape = shape;
+        handleEnd.bind(this)(context);
+      } else if (context.symbol === 'CLAP') {
+        context.id = context.client;
+        var options = {
+          type: 'bpmn:ManualTask',
+          hidden: false,
+          x: Math.round(context.clientCoordinates.x),
+          y: Math.round(context.clientCoordinates.y),
+          preset: 'samplerClap',
+          note: 'c3'
+
+        };
+        var shape = this._elementFactory.createShape(options);
+        attachBo (shape,options);
+        this._canvas.addShape(shape);
+        this._lastShape = shape;
+        context.shape = shape;
+        handleEnd.bind(this)(context);
+      }
     }
+
   }, this);
 
   eventBus.on('create.end', handleEnd , this);
@@ -185,26 +217,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     }
   }, this);
 
-  eventBus.on('shape.move.end', function(context) {
-    var shape = context.shape,
-        generator,
-        generatorShape;
-
-    if (isMusicalEvent(shape)) {
-
-      this.inGeneratorRange(shape, function(generator, generatorShape, stepNumber) {
-        this.connect(generator, generatorShape, shape, stepNumber);
-      });
-    } else {
-      // generator moved
-      generatorShape = shape;
-      generator = executor.getGenerator(generatorShape.id);
-
-      this.inElementRange(generator, generatorShape, function(shape, stepNumber) {
-        this.connect(generator, generatorShape, shape, stepNumber);
-      });
-    }
-  }, this);
+  eventBus.on('shape.move.end', handleMovement, this);
 
   eventBus.on('elements.changed', function(context) {
 
