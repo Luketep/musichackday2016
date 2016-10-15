@@ -126,7 +126,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
   eventBus.on('api.client.event', function(context) {
     var existing = this._elementRegistry.filter(function(element) {
-      return element.client === context.clinet;
+      return element.client === context.client;
     });
 
     if (existing.length && existing.length > 0) {
