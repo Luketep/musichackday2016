@@ -14,6 +14,12 @@ var processGeolocation = function(location) {
     if (symbol) submitUserInfo();
 };
 
+var processGeolocationChange = function(location) {
+    coordinates = {lat: location.coords.latitude, long: location.coords.longitude};
+    document.getElementsByClassName("location")[0].innerHTML = JSON.stringify(coordinates,null,2);
+    //if (symbol) submitUserInfo();
+};
+
 var geolocationError = function(msg) {
     alert('error in location detection');
 };
@@ -48,7 +54,7 @@ channel.bind('pusher:subscription_succeeded', function() {
 });
 
 
-var watchID = navigator.geolocation.watchPosition(processGeolocation,geolocationError, {
+var watchID = navigator.geolocation.watchPosition(processGeolocationChange,geolocationError, {
     timeout: 10000,
     enableHighAccuracy: true,
     maximumAge: Infinity
