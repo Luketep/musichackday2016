@@ -28,7 +28,7 @@ function getGeoDistance(lat1, lng1, lat2, lng2) {
 function getAngleBetweenGeoLocations(lat1, lng1, lat2, lng2) {
     // a = azimuth L1, L2 = longitude B1, B2 = latitude
     // sin(a) = abs(L2-L1) / sqrt(sqr(L2-L1) + sqr(B2-B1))
-    return Math.abs(lng2 - lng1) / Math.sqrt(lng2 - lng1) + Math.sqrt(lat1 - lat2);
+    return Math.abs(lng2 - lng1) / Math.sqrt(lng2 - lng1) + Math.sqrt(lat2 - lat1);
 }
 
 function mapGeoDistance(x) {
