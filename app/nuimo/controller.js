@@ -83,7 +83,7 @@ nuimo.on("discover", (device) => {
         device.setLEDMatrix(matrixVolume.getMatrix(device.gain), 255, 0);
         console.log("gain:", device.gain);
 
-        pusher.trigger( 'private-settings-channel', 'gain', { gain: device.gain } );
+        pusher.trigger( 'private-settings-channel', 'gain', { gain: device.gain }, (err, req, res) => console.log(err) );
         //TODO SEND GAIN
         //device id
     });
