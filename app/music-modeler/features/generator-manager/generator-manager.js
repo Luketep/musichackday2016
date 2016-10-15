@@ -189,9 +189,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       return element.client === context.client;
     });
 
-    createNewShape(context);
+    createNewShape.bind(this)(context);
 
-    
+
 
   }, this);
 
