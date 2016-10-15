@@ -131,8 +131,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
     if (existing.length && existing.length > 0) {
       context.shape = existing[0];
-      context.shape.viewbox.x = Math.round((context.coordinates.x * 1000).toFixed(3).split('.')[1]);
-      context.shape.viewbox.y = Math.round((context.coordinates.y * 1000).toFixed(3).split('.')[1]);
+      context.shape.viewbox.x = Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]);
+      context.shape.viewbox.y = Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]);
       handleMovement.bind(this)(context);
     } else {
       // new shape creation
@@ -141,8 +141,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         var options = {
           type: 'bpmn:StartEvent',
           hidden: false,
-          x : Math.round((context.coordinates.x * 1000).toFixed(3).split('.')[1]),
-          y : Math.round((context.coordinates.y * 1000).toFixed(3).split('.')[1]),
+          x : Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]),
+          y : Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]),
           eventDefinitionType: "bpmn:MessageEventDefinition",
           client: context.client,
           subDivision: 4
@@ -159,8 +159,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         var options = {
           type: 'bpmn:ServiceTask',
           hidden: false,
-          x : Math.round((context.coordinates.x * 1000).toFixed(3).split('.')[1]),
-          y : Math.round((context.coordinates.y * 1000).toFixed(3).split('.')[1]),
+          x : Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]),
+          y : Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]),
           preset: 'samplerKick',
           client: context.client,
           note: 'c3'
@@ -177,8 +177,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         var options = {
           type: 'bpmn:ManualTask',
           hidden: false,
-          x : Math.round((context.coordinates.x * 1000).toFixed(3).split('.')[1]),
-          y : Math.round((context.coordinates.y * 1000).toFixed(3).split('.')[1]),
+          x : Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]),
+          y : Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]),
           preset: 'samplerClap',
           client: context.client,
           note: 'c3'
