@@ -1,3 +1,13 @@
+var Pusher = require('pusher');
+
+Pusher.logToConsole = true;
+
+var pusher = new Pusher({
+    app_id: "259586",
+    key: "fe7f64b7bbd141ad1df0",
+    secret: "379094cf97257b76228f"
+});
+
 let Nuimo = require("nuimojs"),
     nuimo = new Nuimo(),
     _ = require("lodash"),
@@ -73,7 +83,7 @@ nuimo.on("discover", (device) => {
         device.setLEDMatrix(matrixVolume.getMatrix(device.gain), 255, 0);
         console.log("gain:", device.gain);
 
-
+        pusher.trigger( 'private-settings-channel', 'gain', { gain: device.gain } );
         //TODO SEND GAIN
         //device id
     });
