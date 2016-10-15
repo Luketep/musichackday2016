@@ -51,7 +51,7 @@ var pusher = new Pusher('fe7f64b7bbd141ad1df0', {
     encrypted: true
 });
 
-var channel = pusher.subscribe('channel');
+var channel = pusher.subscribe('private-mtg-channel');
 
 channel.bind('pusher:subscription_succeeded', function() {
     channel.bind('client-location',
