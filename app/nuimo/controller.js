@@ -2,17 +2,30 @@ let Nuimo = require("nuimojs"),
     nuimo = new Nuimo(),
     _ = require("lodash"),
     matrixLetters = require("./matrixletters");
+    matrixVolume = require("./matrixvolume");
 
 var instruments = [
   {name: "Base Drum", matrix: matrixLetters.BaseDrum},
   {name: "Snare", matrix: matrixLetters.Snare},
-  {name: "Closed Hi-Hat", matrix: matrixLetters.ClosedHiHat}
+  {name: "Closed Hi-Hat", matrix: matrixLetters.ClosedHiHat},
+  {name: "Open Hi-Hat", matrix: matrixLetters.OpenHiHat},
+  {name: "Alien", matrix: matrixLetters.Alien}
 ];
+
+const scale = 1/2800;
+
+function clamp(x) {
+  if (x < 0) return 0;
+  if (x > 1) return 1;
+  return x;
+}
 
 nuimo.on("discover", (device) => {
 
     console.log(`Discovered Nuimo (${device.uuid})`);
     device.instrumentIndex = 0;
+    device.gain = 0.5;
+    device.pitch = 0;
     device.on("connect", () => {
         console.log("Nuimo connected");
     });
@@ -54,6 +67,13 @@ nuimo.on("discover", (device) => {
 
     device.on("rotate", (amount) => {
         console.log(`Rotated by ${amount}`);
+        device.gain += scale * amount;
+        //device.gain = _.clamp(device.gain, 0, 1); //not working :/
+        device.gain = clamp(device.gain);
+        device.setLEDMatrix(matrixVolume.getMatrix(device.gain), 255, 2000);
+        console.log("gain:", device.gain);
+
+
         //TODO SEND GAIN
         //device id
     });
