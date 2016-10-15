@@ -1,0 +1,88 @@
+{
+  "name": "Music",
+  "prefix": "music",
+  "uri": "http://music",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "associations": [],
+  "types": [
+    {
+      "name": "Process",
+      "extends": [
+        "bpmn:Process"
+      ],
+      "properties": [
+        {
+          "name": "tempo",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "volume",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "key",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "scale",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "GeneratorNode",
+      "extends": [
+        "bpmn:StartEvent"
+      ],
+      "properties": [
+        {
+          "name": "subDivision",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "InstrumentNode",
+      "extends": [
+        "bpmn:EndEvent"
+      ],
+      "properties": [
+        {
+          "name": "preset",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "note",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "DrumNode",
+      "extends": [
+        "bpmn:Task"
+      ],
+      "properties": [
+        {
+          "name": "preset",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "note",
+          "isAttr": true,
+          "type": "String"
+        }
+      ]
+    }
+  ]
+}
