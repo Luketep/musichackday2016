@@ -128,12 +128,14 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
   var createNewShape = function (context) {
     // new shape creation
     if (context.symbol === 'SIGNAL') {
+      var x = Math.round((context.coordinates.lat * 10000).toFixed(3).split('.')[1]);
+      var y = Math.round((context.coordinates.long * 10000).toFixed(3).split('.')[1]);
       context.id = context.client;
       var options = {
         type: 'bpmn:StartEvent',
         hidden: false,
-        x : Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]),
-        y : Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]),
+        x : x,
+        y : y,
         eventDefinitionType: "bpmn:MessageEventDefinition",
         client: context.client,
         subDivision: 4
@@ -150,8 +152,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       var options = {
         type: 'bpmn:ServiceTask',
         hidden: false,
-        x : Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]),
-        y : Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]),
+        x : x,
+        y : y,
         preset: 'samplerKick',
         client: context.client,
         note: 'c3'
@@ -168,8 +170,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       var options = {
         type: 'bpmn:ManualTask',
         hidden: false,
-        x : Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]),
-        y : Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]),
+        x : x,
+        y : y,
         preset: 'samplerClap',
         client: context.client,
         note: 'c3'
