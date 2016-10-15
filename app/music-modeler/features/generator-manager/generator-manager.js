@@ -109,8 +109,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       var options = {
         type: 'bpmn:StartEvent',
         hidden: false,
-        x: Math.round(context.clientCoordinates.x),
-        y: Math.round(context.clientCoordinates.y),
+        x: Math.round(context.coordinates.lat),
+        y: Math.round(context.coordinates.long),
         eventDefinitionType: "bpmn:MessageEventDefinition",
         subDivision: 4
       };
@@ -126,8 +126,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       var options = {
         type: 'bpmn:ServiceTask',
         hidden: false,
-        x: Math.round(context.clientCoordinates.x),
-        y: Math.round(context.clientCoordinates.y),
+        x: Math.round(context.coordinates.lat),
+        y: Math.round(context.coordinates.long),
         preset: 'samplerKick',
         note: 'c3'
 
@@ -143,8 +143,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       var options = {
         type: 'bpmn:ManualTask',
         hidden: false,
-        x: Math.round(context.clientCoordinates.x),
-        y: Math.round(context.clientCoordinates.y),
+        x: Math.round(context.coordinates.lat),
+        y: Math.round(context.coordinates.long),
         preset: 'samplerClap',
         note: 'c3'
 
