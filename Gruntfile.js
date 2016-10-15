@@ -113,7 +113,7 @@ module.exports = function(grunt) {
     watch: {
       samples: {
         files: [ '<%= config.sources %>/**/*.*' ],
-        tasks: [ 'copy:app' ]
+        tasks: [ 'copy:app' ],
       }
     },
     connect: {
@@ -127,7 +127,7 @@ module.exports = function(grunt) {
         options: {
           open: true,
           base: [
-
+            '<%= config.dist %>'
           ]
         }
       }
@@ -158,8 +158,6 @@ module.exports = function(grunt) {
       }
     }
   });
-
-  grunt.loadNpmTasks('grunt-express-server');
 
   // tasks
 

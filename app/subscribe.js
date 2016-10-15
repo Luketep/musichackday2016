@@ -15,7 +15,7 @@ var processGeolocation = function(location) {
 };
 
 var geolocationError = function(msg) {
-    console.log("error")
+    alert('error in location detection');
 };
 channel.bind('pusher:subscription_succeeded', function() {
     navigator.geolocation.getCurrentPosition(
