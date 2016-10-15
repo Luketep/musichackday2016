@@ -4,8 +4,35 @@
     <title>Pusher Test</title>
     <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
     <script src="./subscribe.js"></script>
+    <link rel="stylesheet" href="subscribe.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 </head>
 
 <body>
-<pre class="location">loading</pre>
+<div class="container">
+    <div class="row">
+        <div class="location preformatted col-md-4 col-md-offset-4">
+        </div>
+    </div>
+
+    <div class="row">
+        <form class="type-selection" >
+            <select class="form-control" id="type-selection" onchange="handleTypeChange(this);">
+                <option value="NONE"></option>
+                <option value="SIGNAL">Signal</option>
+                <option value="DRUM">Sound: drum</option>
+                <option value="CLAP">Sound: clap</option>
+            </select>
+        </form>
+    </div>
+
+
+</div>
+
 </body>

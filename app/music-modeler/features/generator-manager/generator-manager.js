@@ -79,6 +79,10 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling) {
     }
   }, this);
 
+  eventBus.on('custom.create.end', function(context) {
+    console.log(context);
+  }, this);
+
   eventBus.on('shape.removed', function(context) {
     var element = context.element;
 

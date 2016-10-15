@@ -152,7 +152,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       'bpmn-icon-script-task',
       'Create 808 Open Hat',
       { preset: 'samplerOpenHat', note: 'c3'}
-    ),
+    )
   });
 
   return actions;
