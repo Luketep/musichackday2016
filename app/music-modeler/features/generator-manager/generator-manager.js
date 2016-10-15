@@ -86,10 +86,30 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     }
   };
 
+  var attachBo = function (shape, options) {
+    var bo = shape.businessObject;
+
+    if (options) {
+      bo.di.isExpanded = options.isExpanded;
+
+      if (options.preset) {
+        bo.preset = options.preset;
+      }
+
+      if (options.note) {
+        bo.note = options.note;
+      }
+
+      if (options.subDivision) {
+        bo.subDivision = options.subDivision;
+      }
+    }
+  };
+
   eventBus.on('api.client.event', function(context) {
     if (context.symbol === 'SIGNAL') {
       context.id = context.client;
-      var shape = this._elementFactory.createShape({
+      var options = {
         type: 'bpmn:StartEvent',
         hidden: false,
         x: Math.round(0),
@@ -98,7 +118,46 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         height: Math.round(100),
         eventDefinitionType: "bpmn:MessageEventDefinition",
         subDivision: 4
-      });
+      };
+      var shape = this._elementFactory.createShape(options);
+      attachBo (shape,options);
+      this._canvas.addShape(shape);
+
+      this._lastShape = shape;
+      handleEnd.bind(this)(shape);
+    } else if (context.symbol === 'DRUM') {
+      context.id = context.client;
+      var options = {
+        type: 'bpmn:ServiceTask',
+        hidden: false,
+        x: Math.round(0),
+        y: Math.round(0),
+        width: Math.round(100),
+        height: Math.round(100),
+        preset: 'samplerKick',
+        note: 'c3'
+
+      };
+      var shape = this._elementFactory.createShape(options);
+      attachBo (shape,options);
+      this._canvas.addShape(shape);
+      this._lastShape = shape;
+      handleEnd.bind(this)(shape);
+    } else if (context.symbol === 'CLAP') {
+      context.id = context.client;
+      var options = {
+        type: 'bpmn:ServiceTask',
+        hidden: false,
+        x: Math.round(0),
+        y: Math.round(0),
+        width: Math.round(100),
+        height: Math.round(100),
+        preset: 'samplerClap',
+        note: 'c3'
+
+      };
+      var shape = this._elementFactory.createShape(options);
+      attachBo (shape,options);
       this._canvas.addShape(shape);
       this._lastShape = shape;
       handleEnd.bind(this)(shape);
