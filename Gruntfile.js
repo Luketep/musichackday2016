@@ -75,7 +75,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%=config.sources %>/lib/',
+            cwd: '<%=config.sources %>/music-modeler/lib/',
             src:[ '*.js' ],
             dest: '<%= config.dist %>/lib'
           }
