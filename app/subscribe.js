@@ -6,11 +6,12 @@ var pusher = new Pusher('fe7f64b7bbd141ad1df0', {
     encrypted: true
 });
 
-var channel = pusher.subscribe('private-mtg-channel');
+channel = pusher.subscribe('private-mtg-channel');
 
 var processGeolocation = function(location) {
     coordinates = {lat: location.coords.latitude, long: location.coords.longitude};
     document.getElementsByClassName("location")[0].innerHTML = JSON.stringify(coordinates,null,2);
+    if (symbol) submitUserInfo();
 };
 
 var geolocationError = function(msg) {
@@ -20,7 +21,8 @@ var geolocationError = function(msg) {
 var submitUserInfo = function () {
     var data = {
         coordinates : coordinates,
-        symbol : symbol
+        symbol : symbol,
+        client: channel.pusher.sessionID
     };
     var triggered = channel.trigger('client-location', data);
 };
