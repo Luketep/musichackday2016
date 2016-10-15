@@ -53,7 +53,7 @@ channel.bind('pusher:subscription_succeeded', function() {
             {
                 timeout: 100000,
                 enableHighAccuracy: true,
-                maximumAge: Infinity
+                maximumAge: 0
             }
         );
         initialized = true;
