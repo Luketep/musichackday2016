@@ -85,7 +85,7 @@ var settingsChannel = pusher.subscribe('private-settings-channel');
 channel.bind('pusher:subscription_succeeded', function() {
     channel.bind('client-location',
         function(data) {
-            data.clientCoordinates = converter.getTargetPosition({x: 0, y:0},coordinates.lat, coordinates.long, data.lat, data.long);
+            data.clientCoordinates = converter.getTargetPosition({x: 0, y:0},coordinates.lat, coordinates.long, data.coordinates.lat, data.coordinates.long);
             bpmnjs._emit('api.client.event',data);
         }
     );
