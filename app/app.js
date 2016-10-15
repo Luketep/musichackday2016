@@ -7,18 +7,10 @@ var propertiesPanelModule = require('bpmn-js-properties-panel'),
 var converter = require('./music-modeler/util/CoordinateConverter');
 var MusicModeler = require('./music-modeler');
 
-navigator.geolocation.getCurrentPosition(
-    processGeolocation,
-    // Optional settings below
-    geolocationError,
-    {
-        timeout: 100000,
-        enableHighAccuracy: true,
-        maximumAge: Infinity
-    }
-);
+
 
 var coordinates = {};
+
 var processGeolocation = function(location) {
     coordinates = {lat: location.coords.latitude, long: location.coords.longitude};
 };
@@ -30,6 +22,17 @@ var processGeolocationChange = function(location) {
 var geolocationError = function(msg) {
     alert('error in location detection');
 };
+
+navigator.geolocation.getCurrentPosition(
+    processGeolocation,
+    // Optional settings below
+    geolocationError,
+    {
+        timeout: 100000,
+        enableHighAccuracy: true,
+        maximumAge: Infinity
+    }
+);
 
 var modeler = new MusicModeler({
   container: '#canvas',
