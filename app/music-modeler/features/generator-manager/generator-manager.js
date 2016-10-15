@@ -131,8 +131,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
     if (existing.length && existing.length > 0) {
       context.shape = existing[0];
-      context.shape.viewbox.x = Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]);
-      context.shape.viewbox.y = Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]);
+      context.shape.x = Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]);
+      context.shape.y = Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]);
       handleMovement.bind(this)(context);
     } else {
       // new shape creation
