@@ -4,7 +4,32 @@ var propertiesPanelModule = require('bpmn-js-properties-panel'),
     propertiesProviderModule = require('./custom-properties-panel/providers/music'),
     musicModdleDescriptor = require('./custom-properties-panel/descriptors/music');
 
+var converter = require('./music-modeler/util/CoordinateConverter');
 var MusicModeler = require('./music-modeler');
+
+navigator.geolocation.getCurrentPosition(
+    processGeolocation,
+    // Optional settings below
+    geolocationError,
+    {
+        timeout: 100000,
+        enableHighAccuracy: true,
+        maximumAge: Infinity
+    }
+);
+
+var coordinates = {};
+var processGeolocation = function(location) {
+    coordinates = {lat: location.coords.latitude, long: location.coords.longitude};
+};
+
+var processGeolocationChange = function(location) {
+    coordinates = {lat: location.coords.latitude, long: location.coords.longitude};
+};
+
+var geolocationError = function(msg) {
+    alert('error in location detection');
+};
 
 var modeler = new MusicModeler({
   container: '#canvas',
@@ -57,6 +82,7 @@ var settingsChannel = pusher.subscribe('private-settings-channel');
 channel.bind('pusher:subscription_succeeded', function() {
     channel.bind('client-location',
         function(data) {
+            data.clientCoordinates = converter.getTargetPosition({x: 0, y:0},coordinates.lat, coordinates.long, data.lat, data.long);
             bpmnjs._emit('api.client.event',data);
         }
     );
