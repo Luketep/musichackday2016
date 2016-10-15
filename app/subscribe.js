@@ -48,7 +48,7 @@ channel.bind('pusher:subscription_succeeded', function() {
             // Optional settings below
             geolocationError,
             {
-                timeout: 10000,
+                timeout: 100000,
                 enableHighAccuracy: true,
                 maximumAge: Infinity
             }
