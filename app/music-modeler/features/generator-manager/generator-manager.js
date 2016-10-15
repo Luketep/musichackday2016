@@ -128,8 +128,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
   var createNewShape = function (context) {
     // new shape creation
     if (context.symbol === 'SIGNAL') {
-      var x = context.clientCoordinates.x;
-      var y = context.clientCoordinates.y;
+      var x = Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]);
+      var y = Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]);
       context.id = context.client;
       var options = {
         type: 'bpmn:StartEvent',
