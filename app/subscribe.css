@@ -1,0 +1,21 @@
+body {
+    position: relative;
+}
+
+.container {
+
+}
+
+.location {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.preformatted {
+    font-family: monospace;
+    white-space: pre;
+}
+
+.container .row {
+    padding-bottom: 1em;
+}

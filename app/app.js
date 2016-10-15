@@ -56,8 +56,7 @@ var channel = pusher.subscribe('private-mtg-channel');
 channel.bind('pusher:subscription_succeeded', function() {
     channel.bind('client-location',
         function(data) {
-            // add new price into the APPL widget
-            console.log("got new client" + JSON.stringify(data));
+            bpmnjs._emit('api.client.event',data);
         }
     );
 });
