@@ -44,6 +44,8 @@ handleTypeChange = function (event) {
 
 initialized = false;
 
+age = 500;
+
 channel.bind('pusher:subscription_succeeded', function() {
     if (!initialized) {
         navigator.geolocation.getCurrentPosition(
@@ -53,7 +55,7 @@ channel.bind('pusher:subscription_succeeded', function() {
             {
                 timeout: 100000,
                 enableHighAccuracy: true,
-                maximumAge: 10000
+                maximumAge: age
             }
         );
         initialized = true;
@@ -61,9 +63,8 @@ channel.bind('pusher:subscription_succeeded', function() {
 
 });
 
-
 var watchID = navigator.geolocation.watchPosition(processGeolocationChange,geolocationError, {
     timeout: 10000,
     enableHighAccuracy: true,
-    maximumAge: 10000
+    maximumAge: age
 });
