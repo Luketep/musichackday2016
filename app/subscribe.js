@@ -1,4 +1,7 @@
 // Enable pusher logging - don't include this in production
+
+navigator.permissions.query({name:'geolocation'});
+
 Pusher.logToConsole = true;
 
 var pusher = new Pusher('fe7f64b7bbd141ad1df0', {
