@@ -113,8 +113,8 @@ module.exports = function(grunt) {
     watch: {
       samples: {
         files: [ '<%= config.sources %>/**/*.*' ],
-        tasks: [ 'copy:app' ]
-      },
+        tasks: [ 'copy:app' ],
+      }
     },
     connect: {
       options: {
@@ -145,6 +145,17 @@ module.exports = function(grunt) {
       unit: {
         browsers: TEST_BROWSERS
       }
+    },
+    express: {
+      options: {
+        // Override defaults here
+      },
+      dev: {
+        options: {
+          port : 3000,
+          script: 'server/main.js'
+        }
+      }
     }
   });
 
@@ -164,4 +175,6 @@ module.exports = function(grunt) {
   grunt.registerTask('auto-test', [ 'karma:unit' ]);
 
   grunt.registerTask('default', [ 'jshint', 'build' ]);
+
+  grunt.registerTask('server', [ 'express:dev' ]);
 };
