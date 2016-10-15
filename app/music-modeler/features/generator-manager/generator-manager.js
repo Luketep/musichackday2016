@@ -131,7 +131,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
     if (existing.length && existing.length > 0) {
       context.shape = existing[0];
-      handleMovement(context);
+      handleMovement.bind(this)(context);
     } else {
       // new shape creation
       if (context.symbol === 'SIGNAL') {
