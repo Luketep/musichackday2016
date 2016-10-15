@@ -16,6 +16,8 @@ var DEFAULT_DIVISION = 16; // just need divider coz: 1 / n
 
 var MAX_DIST = 800;
 
+var assign = require('lodash/object/assign');
+
 /**
  * @example
  *
@@ -27,11 +29,13 @@ var MAX_DIST = 800;
  *  changed: [ 4 ]
  * }
  */
-function GeneratorManager(eventBus, executor, elementRegistry, modeling) {
+function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas, elementFactory, create) {
   this._eventBus = eventBus;
   this._executor = executor;
   this._elementRegistry = elementRegistry;
   this._modeling = modeling;
+  this._canvas = canvas;
+  this._elementFactory = elementFactory;
 
   eventBus.on('master-clock.start', function(context) {
     var numSteps = context.numSteps;
@@ -39,9 +43,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling) {
     this._numSteps = numSteps;
   }, this);
 
-  eventBus.on('create.end', function(context) {
+  var handleEnd = function(context) {
     var shape = context.shape;
 
+    if (!shape) {
+      shape = this._lastShape;
+    }
     if (is(shape, 'bpmn:StartEvent')) {
       var generator = this.createNewGenerator(shape);
 
@@ -77,7 +84,28 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling) {
         modeling.connect(generatorShape, shape);
       });
     }
+  };
+
+  eventBus.on('api.client.event', function(context) {
+    if (context.symbol === 'SIGNAL') {
+      context.id = context.client;
+      var shape = this._elementFactory.createShape({
+        type: 'bpmn:StartEvent',
+        hidden: false,
+        x: Math.round(0),
+        y: Math.round(0),
+        width: Math.round(100),
+        height: Math.round(100),
+        eventDefinitionType: "bpmn:MessageEventDefinition",
+        subDivision: 4
+      });
+      this._canvas.addShape(shape);
+      this._lastShape = shape;
+      handleEnd.bind(this)(shape);
+    }
   }, this);
+
+  eventBus.on('create.end', handleEnd , this);
 
   eventBus.on('custom.create.end', function(context) {
     console.log(context);
@@ -149,7 +177,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling) {
 
 module.exports = GeneratorManager;
 
-GeneratorManager.$inject = [ 'eventBus', 'executor', 'elementRegistry', 'modeling' ];
+GeneratorManager.$inject = [ 'eventBus', 'executor', 'elementRegistry', 'modeling', 'canvas', 'elementFactory', 'create' ];
 
 GeneratorManager.prototype.connect = function (generator, generatorShape, shape, stepNumber) {
   var modeling = this._modeling;
