@@ -5,6 +5,7 @@ Pusher.logToConsole = true;
 var pusher = new Pusher({
     appId: "259586",
     key: "fe7f64b7bbd141ad1df0",
+    host: "api-eu.pusher.com",
     secret: "379094cf97257b76228f"
 });
 
