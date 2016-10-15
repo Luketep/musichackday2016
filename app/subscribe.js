@@ -6,7 +6,7 @@ var pusher = new Pusher('fe7f64b7bbd141ad1df0', {
     encrypted: true
 });
 
-var channel = pusher.subscribe('private-channel');
+var channel = pusher.subscribe('private-mtg-channel');
 
 var processGeolocation = function(location) {
     var coordinates = {lat: location.coords.latitude, long: location.coords.longitude};

@@ -51,11 +51,15 @@ var pusher = new Pusher('fe7f64b7bbd141ad1df0', {
     encrypted: true
 });
 
-var channel = pusher.subscribe('mtg-channel');
+var channel = pusher.subscribe('channel');
 
-channel.bind('client-location',
-    function(data) {
-        // add new price into the APPL widget
-        console.log("got new client" + JSON.stringify(data));
-    }
-);
+channel.bind('pusher:subscription_succeeded', function() {
+    channel.bind('client-location',
+        function(data) {
+            // add new price into the APPL widget
+            console.log("got new client" + JSON.stringify(data));
+        }
+    );
+});
+
+
