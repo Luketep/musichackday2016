@@ -207,7 +207,6 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       latestElement.businessObject.preset = data.sample;
       latestElement.uuid = data.uuid;
     }
-    debugger;
   }, this);
 
   eventBus.on('create.end', handleEnd , this);
