@@ -16,7 +16,7 @@ let Nuimo = require("nuimojs"),
     matrixVolume = require("./matrixvolume");
 
 var instruments = [
-  {name: "samplerDrum", matrix: matrixLetters.BaseDrum},
+  {name: "samplerKick", matrix: matrixLetters.BaseDrum},
   {name: "samplerSnare", matrix: matrixLetters.Snare},
   {name: "samplerClosedHat", matrix: matrixLetters.ClosedHiHat},
   {name: "samplerOpenHat", matrix: matrixLetters.OpenHiHat},
