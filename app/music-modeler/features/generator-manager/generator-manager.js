@@ -184,7 +184,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       if (existing[0].uuid) {
         context.uuid = existing[0].uuid;
       }
-      this._canvas.removeShape(existing[0]);
+      for (var i = 0; i < existing.length; i++) {
+        this._canvas.removeShape(existing[i]);
+      }
       createNewShape.bind(this)(context);
     } else {
       createNewShape.bind(this)(context);
