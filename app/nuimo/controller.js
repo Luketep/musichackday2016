@@ -82,7 +82,6 @@ nuimo.on("discover", (device) => {
           console.log("Swiped down");
           // send pitch - 1
           pusher.trigger( 'private-settings-channel', 'pitch', { pitch: -1, uuid: device.uuid}, callback );
-
         }
       }
     });

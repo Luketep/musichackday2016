@@ -197,6 +197,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
   }, this);
 
+  eventBus.on('sample.change', function(data) {debugger;}, this);
+
   eventBus.on('create.end', handleEnd , this);
 
   eventBus.on('custom.create.end', function(context) {

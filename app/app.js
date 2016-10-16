@@ -93,6 +93,12 @@ channel.bind('pusher:subscription_succeeded', function() {
     settingsChannel.bind('gain', function (data) {
         bpmnjs._emit('gain.change',data);
     });
+
+    settingsChannel.bind('sample', function (data) {
+        bpmnjs._emit('sample.change',data);
+    });
+
+    settingsChannel.bind('pitch', function (data) {
+        bpmnjs._emit('pitch.change',data);
+    });
 });
-
-
