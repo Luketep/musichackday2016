@@ -127,11 +127,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
   var createNewShape = function (context) {
     // new shape creation
+    var options;
+    var x = Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]);
+    var y = Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]);
     if (context.symbol === 'SIGNAL') {
-      var x = Math.round((context.coordinates.lat * 1000).toFixed(3).split('.')[1]);
-      var y = Math.round((context.coordinates.long * 1000).toFixed(3).split('.')[1]);
       context.id = context.client;
-      var options = {
+      options = {
         type: 'bpmn:StartEvent',
         hidden: false,
         x : x,
@@ -140,16 +141,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         client: context.client,
         subDivision: 4
       };
-      var shape = this._elementFactory.createShape(options);
-      attachBo (shape,options);
-      this._canvas.addShape(shape);
-
-      this._lastShape = shape;
-      context.shape = shape;
-      handleEnd.bind(this)(context);
     } else if (context.symbol === 'DRUM') {
       context.id = context.client;
-      var options = {
+      options = {
         type: 'bpmn:ServiceTask',
         hidden: false,
         x : x,
@@ -159,15 +153,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         note: 'c3'
 
       };
-      var shape = this._elementFactory.createShape(options);
-      attachBo (shape,options);
-      this._canvas.addShape(shape);
-      this._lastShape = shape;
-      context.shape = shape;
-      handleEnd.bind(this)(context);
     } else if (context.symbol === 'CLAP') {
       context.id = context.client;
-      var options = {
+      options = {
         type: 'bpmn:ManualTask',
         hidden: false,
         x : x,
@@ -175,12 +163,10 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         preset: 'samplerClap',
         client: context.client,
         note: 'c3'
-
       };
       var shape = this._elementFactory.createShape(options);
       attachBo (shape,options);
       this._canvas.addShape(shape);
-      this._lastShape = shape;
       context.shape = shape;
       handleEnd.bind(this)(context);
     }
