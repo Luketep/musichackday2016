@@ -23,6 +23,12 @@ var instruments = [
   {name: "Alien", matrix: matrixLetters.Alien}
 ];
 
+function callback(err, req, res) {
+  if (err) {
+    console.log("Du Hurensohn", err);
+  }
+}
+
 const scale = 1/2800;
 
 function clamp(x) {
@@ -57,21 +63,26 @@ nuimo.on("discover", (device) => {
         if (device.instrumentIndex < 0) {
           device.instrumentIndex = instruments.length - 1;
         }
-        //TODO SEND SELECTION
+        //SEND SELECTION
         //device id + instrument
         console.log("instrument index", device.instrumentIndex);
         console.log(instruments[device.instrumentIndex].name);
         device.setLEDMatrix(instruments[device.instrumentIndex].matrix, 255, 2000);
+        pusher.trigger( 'private-settings-channel', 'sample', { sample: instruments[device.instrumentIndex].name, uuid: device.uuid}, callback );
+
       }
       //change pitch
       else {
         if (direction == Nuimo.Direction.UP) {
           console.log("Swiped up");
-          //TODO send pitch + 1
+          // send pitch + 1
+          pusher.trigger( 'private-settings-channel', 'pitch', { pitch: 1, uuid: device.uuid}, callback );
         }
         if (direction == Nuimo.Direction.DOWN) {
           console.log("Swiped down");
-          //TODO send pitch - 1
+          // send pitch - 1
+          pusher.trigger( 'private-settings-channel', 'pitch', { pitch: -1, uuid: device.uuid}, callback );
+
         }
       }
     });
@@ -84,7 +95,7 @@ nuimo.on("discover", (device) => {
         device.setLEDMatrix(matrixVolume.getMatrix(device.gain), 255, 0);
         console.log("gain:", device.gain);
 
-        pusher.trigger( 'private-settings-channel', 'gain', { gain: device.gain }, (err, req, res) => console.log(err) );
+        pusher.trigger( 'private-settings-channel', 'gain', { gain: device.gain, uuid: device.uuid}, callback );
         //TODO SEND GAIN
         //device id
     });
