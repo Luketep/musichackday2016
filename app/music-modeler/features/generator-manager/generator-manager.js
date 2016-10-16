@@ -198,7 +198,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       hidden: false,
       x : 0,
       y : 0,
-      preset: 'ohYeahSampler',
+      preset: 'ohYeahSample',
       client: context.client,
       note: 'c3'
     };
