@@ -191,10 +191,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       return element.client === context.client;
     });
 
-    createNewShape.bind(this)(context);
-
-
-
+    if (existing.length && existing.length > 0) {
+      this._canvas.removeShape(existing[0]);
+      createNewShape.bind(this)(context);
+    } else {
+      createNewShape.bind(this)(context);
+    }
   }, this);
 
   eventBus.on('sample.change', function(data) {debugger;}, this);
