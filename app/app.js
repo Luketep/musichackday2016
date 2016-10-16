@@ -101,4 +101,8 @@ channel.bind('pusher:subscription_succeeded', function() {
     settingsChannel.bind('pitch', function (data) {
         bpmnjs._emit('pitch.change',data);
     });
+
+    settingsChannel.bind('vocal', function (data) {
+        bpmnjs._emit('vocal.change',data);
+    });
 });

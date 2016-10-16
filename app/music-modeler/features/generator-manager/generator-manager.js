@@ -191,6 +191,24 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     }
   }, this);
 
+  eventBus.on('vocal.change', function(data) {
+    var context = {};
+    options = {
+      type: 'bpmn:ManualTask',
+      hidden: false,
+      x : x,
+      y : y,
+      preset: 'ohYeahSampler',
+      client: context.client,
+      note: 'c3'
+    };
+    var shape = this._elementFactory.createShape(options);
+    attachBo (shape,options);
+    this._canvas.addShape(shape);
+    context.shape = shape;
+    handleEnd.bind(this)(context);
+  });
+
   eventBus.on('sample.change', function(data) {
     console.log(data);
     var latestElement;

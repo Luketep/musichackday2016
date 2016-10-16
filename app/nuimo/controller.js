@@ -49,6 +49,8 @@ nuimo.on("discover", (device) => {
 
     device.on("press", () => {
         console.log("Button pressed");
+        pusher.trigger( 'private-settings-channel', 'vocal', {uuid: device.uuid}, callback );
+
     });
 
     device.on("release", () => {
