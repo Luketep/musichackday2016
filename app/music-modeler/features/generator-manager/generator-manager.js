@@ -193,7 +193,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
   eventBus.on('vocal.change', function(data) {
     var context = {};
-    options = {
+    var options = {
       type: 'bpmn:ManualTask',
       hidden: false,
       x : 0,
