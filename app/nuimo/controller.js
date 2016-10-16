@@ -45,6 +45,8 @@ nuimo.on("discover", (device) => {
     device.pitch = 0;
     device.on("connect", () => {
         console.log("Nuimo connected");
+        device.setLEDMatrix(matrixLetters.smile, 255, 2000);
+
     });
 
     device.on("press", () => {
@@ -55,6 +57,7 @@ nuimo.on("discover", (device) => {
 
     device.on("release", () => {
         console.log("Button released");
+        device.setLEDMatrix(matrixLetters.fuck, 255, 2000);
     });
 
     device.on("swipe", (direction) => {

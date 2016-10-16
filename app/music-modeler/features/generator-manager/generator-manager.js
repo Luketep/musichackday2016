@@ -168,6 +168,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     if (context.uuid) {
       options.uuid = context.uuid;
     }
+    if (context.preset) {
+      options.preset = context.preset;
+    }
     var shape = this._elementFactory.createShape(options);
     attachBo (shape,options);
     this._canvas.addShape(shape);
@@ -183,8 +186,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     if (existing.length && existing.length > 0) {
       if (existing[0].uuid) {
         context.uuid = existing[0].uuid;
+        context.preset = existing[0].businessObject.preset;
+        console.log(context.preset);
       }
-      this._canvas.removeShape(existing[0]);
+      for (var i = 0; i < existing.length; i++) {
+        this._canvas.removeShape(existing[i]);
+      }
       createNewShape.bind(this)(context);
     } else {
       createNewShape.bind(this)(context);
@@ -198,7 +205,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       hidden: false,
       x : 0,
       y : 0,
-      preset: 'ohYeahSampler',
+      preset: 'ohYeahSample',
       client: context.client,
       note: 'c3'
     };
