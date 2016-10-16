@@ -204,8 +204,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       console.log(existing);
       existing[0].businessObject.preset = data.sample;
     } else {
-      element.businessObject.preset = data.sample;
-      element.uuid = data.uuid;
+      latestElement.businessObject.preset = data.sample;
+      latestElement.uuid = data.uuid;
     }
     debugger;
   }, this);
