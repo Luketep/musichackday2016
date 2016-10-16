@@ -165,6 +165,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         note: 'c3'
       };
     }
+    if (context.uuid) {
+      options.uuid = context.uuid;
+    }
     var shape = this._elementFactory.createShape(options);
     attachBo (shape,options);
     this._canvas.addShape(shape);
@@ -178,6 +181,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     });
 
     if (existing.length && existing.length > 0) {
+      if (existing[0].uuid) {
+        context.uuid = existing[0].uuid;
+      }
       this._canvas.removeShape(existing[0]);
       createNewShape.bind(this)(context);
     } else {
@@ -189,11 +195,17 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     console.log(data);
     var latestElement;
     var existing = this._elementRegistry.filter(function(element) {
-      latestElement = element;
+      if (element.businessObject.preset) {
+        latestElement = element;
+      }
       return element.uuid === data.uuid;
     });
     if (existing && existing.length > 0) {
       console.log(existing);
+      existing[0].businessObject.preset = data.sample;
+    } else {
+      element.businessObject.preset = data.sample;
+      element.uuid = data.uuid;
     }
     debugger;
   }, this);
