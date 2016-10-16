@@ -187,6 +187,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
 
   eventBus.on('sample.change', function(data) {
     console.log(data);
+    var existing = this._elementRegistry.filter(function(element) {
+      return element.uuid === data.uuid;
+    });
+    if (existing && existing.length > 0) {
+      console.log(existing);
+    }
     debugger;
   }, this);
 
