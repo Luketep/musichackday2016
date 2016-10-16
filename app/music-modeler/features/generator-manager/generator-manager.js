@@ -184,6 +184,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
       if (existing[0].uuid) {
         context.uuid = existing[0].uuid;
         context.preset = existing[0].businessObject.preset;
+        console.log(context.preset);
       }
       for (var i = 0; i < existing.length; i++) {
         this._canvas.removeShape(existing[i]);
