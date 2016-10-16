@@ -73,7 +73,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'create.start-event': createAction(
       'bpmn:StartEvent',
       'generator',
-      'bpmn-icon-start-event-message',
+      'bpmn-icon-start-event-multiple',
       'Create Generator',
       { eventDefinitionType: 'bpmn:MessageEventDefinition', subDivision: 4 }
     ),
@@ -121,35 +121,35 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'create.service-task': createAction(
       'bpmn:ServiceTask',
       'drum',
-      'bpmn-icon-service-task',
+      'bpmn-icon-task-none',
       'Create 808 Kick',
       { preset: 'samplerKick', note: 'c3' }
     ),
     'create.user-task': createAction(
       'bpmn:UserTask',
       'drum',
-      'bpmn-icon-user-task',
+      'bpmn-icon-task-none',
       'Create 808 Snare',
       { preset: 'samplerSnare', note: 'c3'}
     ),
     'create.manual-task': createAction(
       'bpmn:ManualTask',
       'drum',
-      'bpmn-icon-manual-task',
+      'bpmn-icon-task-none',
       'Create 808 Clap',
       { preset: 'samplerClap', note: 'c3'}
     ),
     'create.business-rule-task': createAction(
       'bpmn:BusinessRuleTask',
       'drum',
-      'bpmn-icon-business-rule-task',
+      'bpmn-icon-task-none',
       'Create 808 Closed Hat',
       { preset: 'samplerClosedHat', note: 'c3'}
     ),
     'create.script-task': createAction(
       'bpmn:ScriptTask',
       'drum',
-      'bpmn-icon-script-task',
+      'bpmn-icon-task-none',
       'Create 808 Open Hat',
       { preset: 'samplerOpenHat', note: 'c3'}
     )
