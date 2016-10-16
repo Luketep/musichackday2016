@@ -196,8 +196,8 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     options = {
       type: 'bpmn:ManualTask',
       hidden: false,
-      x : x,
-      y : y,
+      x : 0,
+      y : 0,
       preset: 'ohYeahSampler',
       client: context.client,
       note: 'c3'
