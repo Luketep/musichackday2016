@@ -207,7 +207,7 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     this._canvas.addShape(shape);
     context.shape = shape;
     handleEnd.bind(this)(context);
-  });
+  }, this);
 
   eventBus.on('sample.change', function(data) {
     console.log(data);
