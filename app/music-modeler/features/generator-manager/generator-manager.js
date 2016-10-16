@@ -164,12 +164,12 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
         client: context.client,
         note: 'c3'
       };
-      var shape = this._elementFactory.createShape(options);
-      attachBo (shape,options);
-      this._canvas.addShape(shape);
-      context.shape = shape;
-      handleEnd.bind(this)(context);
     }
+    var shape = this._elementFactory.createShape(options);
+    attachBo (shape,options);
+    this._canvas.addShape(shape);
+    context.shape = shape;
+    handleEnd.bind(this)(context);
   };
 
   eventBus.on('api.client.event', function(context) {
