@@ -168,6 +168,9 @@ function GeneratorManager(eventBus, executor, elementRegistry, modeling, canvas,
     if (context.uuid) {
       options.uuid = context.uuid;
     }
+    if (context.preset) {
+      options.preset = context.preset;
+    }
     var shape = this._elementFactory.createShape(options);
     attachBo (shape,options);
     this._canvas.addShape(shape);
